@@ -1,0 +1,30 @@
+{
+  "name": "livros",
+  "version": "1.0.0",
+  "description": "Projeto da Livraria Saraiva - Microserviço Livros",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/index.js"
+  },
+  "keywords": [
+    "Nodejs",
+    "Express",
+    "mysql",
+    "mysql2",
+    "postman",
+    "jwt",
+    "servidor",
+    "database"
+  ],
+  "author": "João Vitor Andrade",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.10.1"
+  }
+}
