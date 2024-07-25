@@ -35,6 +35,16 @@ routerCarrinho.get("/somar/:id", (req, res) => {
     })
 })
 
+routerCarrinho.get("/somarquantidade/:id", (req, res) => {
+    data.query(`select sum(quantidade) as "quantidade" 
+    from carrinho where idusuario=?;`, req.params.id, (error, dados) => {
+        if (error) {
+            return res.status(500).send({ msg: "Erro ao carregar os dados" })
+        }
+        res.status(200).send({ msg: "Ok", payload: dados })
+    })
+})
+
 routerCarrinho.post("/cadastrar", (req, res) => {
     data.query("insert into carrinho set ?", req.body, (error, result) => {
         if (error) {
@@ -43,5 +53,17 @@ routerCarrinho.post("/cadastrar", (req, res) => {
         res.status(201).send({ msg: "Criado", payload: result })
     })
 })
+
+routerCarrinho.put("/atualizarpreco/:id", (req, res) => {
+    data.query(`update carrinho set quantidade = ?,
+    total = (select sum(quantidade * total))
+    where idcarrinho = ?;`, [req.body, req.params.id], (error, result) => {
+        if (error) {
+            return res.status(500).send({ msg: "Não foi possível atualizar o carrinho" })
+        }
+        res.status(200).send({ msg: "Update", payload: result })
+    })
+})
+
 
 module.exports = routerCarrinho
