@@ -55,11 +55,10 @@ routerCarrinho.post("/cadastrar", (req, res) => {
 })
 
 routerCarrinho.put("/atualizarpreco/:id", (req, res) => {
-    data.query(`update carrinho set quantidade = ?,
-    total = (select sum(quantidade * total))
-    where idcarrinho = ?;`, [req.body, req.params.id], (error, result) => {
+    console.log(req.params.id);
+    data.query(`update carrinho set quantidade = ?, total = quantidade * total where idcarrinho = ?`, [req.body, req.params.id], (error, result) => {
         if (error) {
-            return res.status(500).send({ msg: "Não foi possível atualizar o carrinho" })
+            return res.status(500).send({ msg: "Não foi possível atualizar o carrinho " +error})
         }
         res.status(200).send({ msg: "Update", payload: result })
     })
